@@ -7,6 +7,7 @@ let txtValue = txt.value;
 
 //btn 按鈕監聽
 btn.addEventListener('click', function (e) {
+  let txtValue = txt.value;
   if (txtValue == '' || txtValue == undefined || txtValue == null) {
     alert('請輸入文字');
     return;
@@ -72,4 +73,4 @@ deleteAll.addEventListener('click', (e) => {
     updateList(data);
     // location.reload(); codepen不能用 改用setItem
   }
-})
+})  
