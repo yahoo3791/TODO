@@ -1,6 +1,7 @@
 let txt = document.querySelector('.txt');
 let btn = document.querySelector('.btn');
 let list = document.querySelector('.todolist');
+let dataLength = document.querySelector('.dataLength');
 //取data parse轉js object  getItem取出todoName(keycode) or []
 let data = JSON.parse(localStorage.getItem("todoName")) || [];
 let txtValue = txt.value;
@@ -19,6 +20,7 @@ btn.addEventListener('click', function (e) {
   updateList(data);
   localStorage.setItem("todoName", JSON.stringify(data));
   txt.value = '';
+  dataLength.innerText = `目前有${data.length}筆`;
 });
 //txt enter鍵監聽
 txt.addEventListener('keypress', function (e) {
@@ -35,6 +37,7 @@ txt.addEventListener('keypress', function (e) {
     updateList(data);
     localStorage.setItem("todoName", JSON.stringify(data));
     txt.value = '';
+    dataLength.innerText = `目前有${data.length}筆`;
   }
 });
 //資料更新累加顯示
@@ -49,7 +52,11 @@ function updateList(data) {
         </a>
       </li>`;
   }
+  if ( total <= 0 ) {
+    str = '<p style="padding-top:10vh">備忘錄是空的！快點新增備忘錄吧 : )</p>'
+  }
   list.innerHTML = str;
+  dataLength.innerText = `目前有${data.length}筆`;
 }
 updateList(data);
 

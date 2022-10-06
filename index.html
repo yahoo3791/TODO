@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-  <title>Document</title>
+  <title>Todolist</title>
 </head>
 <style>
-  /* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
+  /* google font */
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300&family=Permanent+Marker&display=swap');
 
+  /* http://meyerweb.com/eric/tools/css/reset/ */
+  /* RESET CSS START */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -33,7 +33,6 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
-/* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
@@ -60,33 +59,55 @@ table {
   text-decoration: none;
   box-sizing: border-box;
 }
-/* reset end */
+/* RESET CSS END */
+
 /* style start */
+body {
+  background-image: url('https://picsum.photos/700/500'); 
+  background-repeat: no-repeat;
+  background-size: cover;
+}
   .wrap{
-  width: 80%;
-  margin: 0 auto;
-  text-align:center;
-  padding: 2rem;
+  width: 50%;
+  height: 80vh;
+  margin: 10vh auto;
+  border-radius: 3px;
+  text-align: center;
+  padding: 20px;
+  font-family: 'Noto Sans TC', sans-serif;
+  background-color: rgb(136, 138, 139);
+  box-shadow: 0px 0px 10px rgb(203, 203, 203);
+  position: relative;
 }
 .title{
   font-size: 3rem;
   font-weight: bold;
+  font-family: 'Permanent Marker', cursive;
+  letter-spacing: 0.2em;
+  color: white;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
 }
 .deletBtn{
-  background-color: gray;
-  color:orange;
-  padding: 15px;
+  box-shadow: 2px 2px 2px rgb(116, 90, 90);
+  color:rgb(255, 255, 255);
+  padding: 10px;
   border-radius: 50%;
   margin-left: auto;
 }
+.deletBtn:hover,
+.deletBtn:active {
+  box-shadow: inset 2px 2px 2px rgb(69, 65, 65);
+}
 .todo{
   display: flex;
-  /* justify-content: space-around; */
   align-items: center;
-  padding-top: 20px;
+  padding: 10px 0 10px 0;
+  border-bottom:1px solid rgb(172, 161, 161);
 }
 .todo_p{
-  font-size: 2rem;
+  font-size: 1rem;
   padding-left: 20px;
 }
 .todo_p_check{
@@ -94,80 +115,135 @@ table {
 }
 .input_item{
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 25px 0;
-  max-width: 500px;
-  margin: 0 auto;
+  margin-top: 20px;
+  background-color: rgb(207, 200, 200);
+  border-radius: 2px;
+  border: 2px solid transparent;
+  transition: all .3s;
 }
 .txt{
   border: none;
   outline: none;
-  background-color: gray;
-  border-radius: 20px 0 0 20px;
-  color: white;
-  width: 70%;
+  background-color: rgb(207, 200, 200);
+  color: grey;
+  width: 100%;
   font-size: 24px;
-  padding: 20px 0 ;
+  padding: 1rem;
+  letter-spacing: 0.1em;
   display: block;
-  padding-left: 10px;
+}
+.input_item:active,
+.input_item:hover {
+  border: 2px solid rgb(240, 235, 235);
 }
 .btn{
   border: none;
-  background-color: gray;
-  border-radius: 0 20px 20px 0;
-  width: 30%;
+  background-color: rgb(120, 116, 116);
+  border-radius: 2px;
   font-size: 24px;
-  padding: 20px 0 ;
   display: block;
-  color:orange;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  /* text-align: center; */
+  color:rgb(255, 255, 255);
   cursor: pointer;
+  margin-left: auto;
+  margin-right: 10px;
+  transition: all .3s;
+  padding: 0px;
+}
+.btn:hover,
+.btn:active {
+  box-shadow: 2px 2px 2px rgb(181, 172, 172);
+  transform: translateY(-2px);
+
 }
 .border-top{
   border-top:1px solid gray;
+}
+.todolist {
+  height: 350px;
+  padding: 5px 30px;
+  overflow-y: auto;
+  color:rgb(255, 255, 255);
+}
+::-webkit-scrollbar {
+  width: 0px;
+}
+::-moz-scrollbar {
+  width: 0px;
 }
 i {
   pointer-events: none;
 }
 .deleteAll{
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  padding: 5px 30px;
+  position: absolute;
+  background: gray;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 .deleteAll_btn{
   border: none;
-  background-color: gray;
+  background-color: rgb(255, 255, 255);
   width: 100px;
   height: 30px;
-  color: white;
+  color: gray;
   cursor: pointer;
   transition: all .2s ease;
   box-shadow: 2px 2px 2px gray;
-  margin-bottom:60px;
 }
-.deleteAll_btn:hover{
-  background-color: red;
+.deleteAll_btn:hover {
+  box-shadow: 2px 2px 2px rgb(101, 96, 96);
+  transform: translateY(-2px);
+}
+.dataLength {
+  color:white;
+}
+/* RWD */
+@media ( max-width:768px ) {
+  .wrap {
+    width: 70%;
+  }
+  .title {
+    font-size: 2rem;
+  }
+  .todolist {
+    padding: 0px 5px 
+  }
+  .txt {
+    font-size: 16px;
+  }
+}
+@media ( max-width:450px ) {
+  .wrap {
+    width: 90%;
+  }
+  .txt {
+    font-size: 14px;
+  }
 }
 
-/* js click */
 </style>
 <body>
   <div class="wrap">
     <h1 class="title">TODOLIST</h1>
     <div class="input_item">
-      <input type="text" class="txt">
-      <button class="btn">add+++</button>
+      <input type="text" class="txt" placeholder="Hi ~ 由我來替您記住待辦事項">
+      <button class="btn">+</button>
     </div>
-    <ul class="border-top todolist">
-      <!-- <li class="todo">
-        <input type="checkbox" style="width: 30px; height: 30px;">
-        <p class="todo_p">${data[i].list}</p>
-        <a href='#' data-num=${i} class="deletBtn">
-          <i class="bi bi-trash" style="font-size: 26px;"></i>
-        </a>
-      </li> -->
-    </ul>
-  </div>
-  <div class="deleteAll">
-    <button class="deleteAll_btn">刪除全部</button>
+    <ul class="border-top todolist"></ul>
+    <div class="deleteAll">
+      <p class="dataLength"></p>
+      <button class="deleteAll_btn">刪除全部</button>
+    </div>
   </div>
   <script src="./app.js"></script>
 </body>
