@@ -1,250 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <link rel="icon" type="image/x-icon" href="book-solid.svg">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-  <title>Todolist</title>
+  <link rel="stylesheet" href="./style/all.css">
+  <title>記事本</title>
 </head>
-<style>
-  /* google font */
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300&family=Permanent+Marker&display=swap');
 
-  /* http://meyerweb.com/eric/tools/css/reset/ */
-  /* RESET CSS START */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-*,*::before,*::after{
-  text-decoration: none;
-  box-sizing: border-box;
-}
-/* RESET CSS END */
-
-/* style start */
-body {
-  background-image: url('https://picsum.photos/700/500'); 
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-  .wrap{
-  width: 50%;
-  height: 80vh;
-  margin: 10vh auto;
-  border-radius: 3px;
-  text-align: center;
-  padding: 20px;
-  font-family: 'Noto Sans TC', sans-serif;
-  background-color: rgb(136, 138, 139);
-  box-shadow: 0px 0px 10px rgb(203, 203, 203);
-  position: relative;
-}
-.title{
-  font-size: 3rem;
-  font-weight: bold;
-  font-family: 'Permanent Marker', cursive;
-  letter-spacing: 0.2em;
-  color: white;
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-}
-.deletBtn{
-  box-shadow: 2px 2px 2px rgb(116, 90, 90);
-  color:rgb(255, 255, 255);
-  padding: 10px;
-  border-radius: 50%;
-  margin-left: auto;
-}
-.deletBtn:hover,
-.deletBtn:active {
-  box-shadow: inset 2px 2px 2px rgb(69, 65, 65);
-}
-.todo{
-  display: flex;
-  align-items: center;
-  padding: 10px 0 10px 0;
-  border-bottom:1px solid rgb(172, 161, 161);
-}
-.todo_p{
-  font-size: 1rem;
-  padding-left: 20px;
-}
-.todo_p_check{
-  text-decoration: line-through;
-}
-.input_item{
-  display: flex;
-  align-items: center;
-  margin-top: 20px;
-  background-color: rgb(207, 200, 200);
-  border-radius: 2px;
-  border: 2px solid transparent;
-  transition: all .3s;
-}
-.txt{
-  border: none;
-  outline: none;
-  background-color: rgb(207, 200, 200);
-  color: grey;
-  width: 100%;
-  font-size: 24px;
-  padding: 1rem;
-  letter-spacing: 0.1em;
-  display: block;
-}
-.input_item:active,
-.input_item:hover {
-  border: 2px solid rgb(240, 235, 235);
-}
-.btn{
-  border: none;
-  background-color: rgb(120, 116, 116);
-  border-radius: 2px;
-  font-size: 24px;
-  display: block;
-  width: 35px;
-  height: 35px;
-  line-height: 35px;
-  /* text-align: center; */
-  color:rgb(255, 255, 255);
-  cursor: pointer;
-  margin-left: auto;
-  margin-right: 10px;
-  transition: all .3s;
-  padding: 0px;
-}
-.btn:hover,
-.btn:active {
-  box-shadow: 2px 2px 2px rgb(181, 172, 172);
-  transform: translateY(-2px);
-
-}
-.border-top{
-  border-top:1px solid gray;
-}
-.todolist {
-  height: 350px;
-  padding: 5px 30px;
-  overflow-y: auto;
-  color:rgb(255, 255, 255);
-}
-::-webkit-scrollbar {
-  width: 0px;
-}
-::-moz-scrollbar {
-  width: 0px;
-}
-i {
-  pointer-events: none;
-}
-.deleteAll{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 50px;
-  padding: 5px 30px;
-  position: absolute;
-  background: gray;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-.deleteAll_btn{
-  border: none;
-  background-color: rgb(255, 255, 255);
-  width: 100px;
-  height: 30px;
-  color: gray;
-  cursor: pointer;
-  transition: all .2s ease;
-  box-shadow: 2px 2px 2px gray;
-}
-.deleteAll_btn:hover {
-  box-shadow: 2px 2px 2px rgb(101, 96, 96);
-  transform: translateY(-2px);
-}
-.dataLength {
-  color:white;
-}
-/* RWD */
-@media ( max-width:768px ) {
-  .wrap {
-    width: 70%;
-  }
-  .title {
-    font-size: 2rem;
-  }
-  .todolist {
-    padding: 0px 5px 
-  }
-  .txt {
-    font-size: 16px;
-  }
-}
-@media ( max-width:450px ) {
-  .wrap {
-    width: 90%;
-  }
-  .txt {
-    font-size: 14px;
-  }
-}
-
-</style>
 <body>
   <div class="wrap">
-    <h1 class="title">TODOLIST</h1>
+    <h1 class="title"><img class="me-4" src="./book-solid.svg" alt="">todolist</h1>
     <div class="input_item">
-      <input type="text" class="txt" placeholder="Hi ~ 由我來替您記住待辦事項">
+      <input type="text" class="txt" placeholder="">
       <button class="btn">+</button>
     </div>
     <ul class="border-top todolist"></ul>
     <div class="deleteAll">
-      <p class="dataLength"></p>
+      <a href="javascript:void(0)" class="btn-toggle border position-absolute start-0" title="收合按鈕">＋</a>
+      <p class="dataLength pe-5"></p>
       <button class="deleteAll_btn">刪除全部</button>
     </div>
   </div>
+  <div
+    class="toast-message d-flex align-items-center fw-bold text-nowrap mt-3 me-4 px-5 py-3 position-fixed top-0 end-0">
+    新增成功
+    <img src="./images/icons8-pen.gif" alt="">
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
   <script src="./app.js"></script>
 </body>
+
 </html>

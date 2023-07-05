@@ -3,7 +3,7 @@ let btn = document.querySelector('.btn');
 let list = document.querySelector('.todolist');
 let dataLength = document.querySelector('.dataLength');
 //取data parse轉js object  getItem取出todoName(keycode) or []
-let data = JSON.parse(localStorage.getItem("todoName")) || [];
+let data = JSON.parse(localStorage.getItem('todoName')) || [];
 let txtValue = txt.value;
 
 //btn 按鈕監聽
@@ -13,12 +13,18 @@ btn.addEventListener('click', function (e) {
     alert('請輸入文字');
     return;
   }
+
+  $('.toast-message').addClass('toast-active');
+  $('.toast-active').on('animationend', function () {
+    $('.toast-message').removeClass('toast-active');
+  });
+
   let todo = {
-    todotxt: txtValue
-  }
+    todotxt: txtValue,
+  };
   data.push(todo);
   updateList(data);
-  localStorage.setItem("todoName", JSON.stringify(data));
+  localStorage.setItem('todoName', JSON.stringify(data));
   txt.value = '';
   dataLength.innerText = `目前有${data.length}筆`;
 });
@@ -31,11 +37,11 @@ txt.addEventListener('keypress', function (e) {
       return;
     }
     let todo = {
-      todotxt: txtValue
-    }
+      todotxt: txtValue,
+    };
     data.push(todo);
     updateList(data);
-    localStorage.setItem("todoName", JSON.stringify(data));
+    localStorage.setItem('todoName', JSON.stringify(data));
     txt.value = '';
     dataLength.innerText = `目前有${data.length}筆`;
   }
@@ -46,14 +52,16 @@ function updateList(data) {
   let total = data.length;
   for (let i = 0; i < total; i++) {
     str += `<li class="todo">
-        <p class="todo_p">${i + 1}. ${data[i].todotxt}</p>
+        <p class="todo_p">${i + 1}.<span class="ps-3">${
+      data[i].todotxt
+    }</span></p>
         <a href='#' data-num=${i} class="deletBtn">
           <i class="bi bi-trash" style="font-size: 26px;"></i>
         </a>
       </li>`;
   }
-  if ( total <= 0 ) {
-    str = '<p style="padding-top:10vh">備忘錄是空的！快點新增備忘錄吧 : )</p>'
+  if (total <= 0) {
+    str = '<p style="padding-top:10vh">空空如也～</p>';
   }
   list.innerHTML = str;
   dataLength.innerText = `目前有${data.length}筆`;
@@ -61,23 +69,27 @@ function updateList(data) {
 updateList(data);
 
 //刪除某筆dataset資料
-list.addEventListener('click', e => {
-  if (e.target.getAttribute('class') == "deletBtn") {
+list.addEventListener('click', (e) => {
+  if (e.target.getAttribute('class') == 'deletBtn') {
     let num = e.target.getAttribute('data-num');
     data.splice(num, 1);
-    localStorage.setItem("todoName", JSON.stringify(data));
+    localStorage.setItem('todoName', JSON.stringify(data));
     updateList(data);
   }
-})
+});
 
 //刪除全部 按鈕監聽和事件
 let deleteAll = document.querySelector('.deleteAll');
 deleteAll.addEventListener('click', (e) => {
-  if (e.target.nodeName == "BUTTON") {
+  if (e.target.nodeName == 'BUTTON') {
     localStorage.clear();
     data = [];
-    localStorage.setItem("todoName", JSON.stringify(data));
+    localStorage.setItem('todoName', JSON.stringify(data));
     updateList(data);
     // location.reload(); codepen不能用 改用setItem
   }
-})  
+});
+
+$('.btn-toggle').click(function () {
+  $('.deleteAll').toggleClass('w-0');
+});
